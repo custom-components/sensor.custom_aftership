@@ -10,7 +10,7 @@ from homeassistant.helpers.entity import Entity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.switch import (PLATFORM_SCHEMA)
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 REQUIREMENTS = ['pyaftership==0.0.1']
 
@@ -62,7 +62,10 @@ class AftershipSensor(Entity):
                 else:
                     title = parcel['title']
                 parcel_data['title'] = title
-                parcel_data['status'] = parcel['tag']
+                if parcel['tag'] == 'InTransit':
+                    parcel_data['status'] = 'In transit'
+                else:
+                    parcel_data['status'] = parcel['tag']
                 parcel_data['slug'] = parcel['slug']
                 parcel_data['last_update'] = parcel['updated_at']
                 self.hass.data[DATA][parcel['tracking_number']] = parcel_data
