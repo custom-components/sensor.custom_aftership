@@ -48,6 +48,7 @@ class AftershipSensor(Entity):
 
     def update(self):
         """Update the sensor"""
+        base_link = 'https://track.aftership.com/'
         result = self._aftership.get_trackings(self._api_key)
         if not result['sucess']:
             return False
@@ -69,6 +70,7 @@ class AftershipSensor(Entity):
                 parcel_data['slug'] = parcel['slug']
                 parcel_data['last_update'] = parcel['updated_at']
                 parcel_data['tracking_number'] = [parcel['tracking_number']
+                parcel_data['link'] = base_link + parcel['slug'] + '/' + [parcel['tracking_number']
                 self.hass.data[DATA][parcel['tracking_number']] = parcel_data
 
     @property
