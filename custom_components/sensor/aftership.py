@@ -10,7 +10,7 @@ from homeassistant.helpers.entity import Entity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import (DOMAIN, PLATFORM_SCHEMA)
 
-__version__ = '0.1.0'
+__version__ = '0.3.0'
 
 REQUIREMENTS = ['pyaftership==0.0.2']
 
