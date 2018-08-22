@@ -20,5 +20,18 @@ key | description
 **platform (Required)** | The platform name.  
 **api_key (Required)** | Your Aftership API key.
 
+**Serice Calls:**
+
+`sensor.aftership_new_tracking`
+
+Example JSON data format. **All fields are required**
+```json
+{
+  "title":"HA Shirt",
+  "slug":"usps",
+  "tracking_number":"123456789"
+}
+```
+
 ***
 Due to how `custom_componentes` are loaded, it is normal to see a `ModuleNotFoundError` error on first boot after adding this, to resolve it, restart Home-Assistant.

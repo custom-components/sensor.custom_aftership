@@ -8,17 +8,28 @@ import logging
 import voluptuous as vol
 from homeassistant.helpers.entity import Entity
 import homeassistant.helpers.config_validation as cv
-from homeassistant.components.switch import (PLATFORM_SCHEMA)
+from homeassistant.components.sensor import (DOMAIN, PLATFORM_SCHEMA)
 
 __version__ = '0.1.0'
 
-REQUIREMENTS = ['pyaftership==0.0.1']
+REQUIREMENTS = ['pyaftership==0.0.2']
 
 CONF_API_KEY = 'api_key'
 CONF_NAME = 'name'
 
+TITLE = 'title'
+SLUG = 'slug'
+TRACKING_NUMBER = 'tracking_number'
+
 DATA = 'aftership_data'
 
+SERVICE_NEW_TRACKING = 'aftership_new_tracking'
+
+NEW_TRACKING_SERVICE_SCHEMA = vol.Schema({
+    vol.Required(TITLE): cv.string,
+    vol.Required(SLUG): cv.string,
+    vol.Required(TRACKING_NUMBER): cv.string,
+})
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_API_KEY): cv.string,
@@ -32,6 +43,24 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     api_key = config.get(CONF_API_KEY)
     name = config.get(CONF_NAME)
     add_devices([AftershipSensor(hass, api_key, name)])
+
+    def handle_new_tracking(call):
+        """Call when a user creates a new Afterhip tracking from HASS."""
+        from pyaftership import AfterShip
+        title = call.data[TITLE]
+        slug = call.data[SLUG]
+        tracking_number = call.data[TRACKING_NUMBER]
+
+        _aftership = AfterShip()
+        _aftership.add_tracking(api_key, slug, title, tracking_number)
+
+        if not result['success']:
+            _LOGGER.debug("Created Aftership tracking")
+        else:
+            _LOGGER.error("Failed to create new tracking")
+
+    hass.services.register(DOMAIN, SERVICE_NEW_TRACKING, handle_new_tracking,
+                           schema=NEW_TRACKING_SERVICE_SCHEMA)
 
 class AftershipSensor(Entity):
     """The sensor class"""
@@ -50,7 +79,7 @@ class AftershipSensor(Entity):
         """Update the sensor"""
         base_link = 'https://track.aftership.com/'
         result = self._aftership.get_trackings(self._api_key)
-        if not result['sucess']:
+        if not result['success']:
             return False
         else:
             self.hass.data[DATA] = {}
@@ -69,8 +98,8 @@ class AftershipSensor(Entity):
                     parcel_data['status'] = parcel['tag']
                 parcel_data['slug'] = parcel['slug']
                 parcel_data['last_update'] = parcel['updated_at']
-                parcel_data['tracking_number'] = [parcel['tracking_number']
-                parcel_data['link'] = base_link + parcel['slug'] + '/' + [parcel['tracking_number']
+                parcel_data['tracking_number'] = parcel['tracking_number']
+                parcel_data['link'] = base_link + parcel['slug'] + '/' + parcel['tracking_number']
                 self.hass.data[DATA][parcel['tracking_number']] = parcel_data
 
     @property
