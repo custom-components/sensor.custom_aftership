@@ -9,3 +9,5 @@ script:
   - hass -c . --daemon
   - sleep 10
   - find . -name \*home-assistant.log
+  - HALOG=$(cat ./home-assistant.log)
+  - echo "$HALOG"
