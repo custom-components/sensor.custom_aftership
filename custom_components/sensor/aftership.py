@@ -83,6 +83,7 @@ class AftershipSensor(Entity):
         if not result['success']:
             return False
         else:
+            _LOGGER.warning(result)
             self.hass.data[DATA] = {}
             data = result['data']
             self._state = data['count']

@@ -7,4 +7,7 @@ script:
   - find . -name \*.py -exec pycodestyle {} +
   - hass -c . --script check_config
   - ls
-  - hass -c .
+  - hass -c . --daemon
+  - wait 10
+  - cat ./home-assistant-log
+  - ls
