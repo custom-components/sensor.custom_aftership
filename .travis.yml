@@ -12,6 +12,6 @@ jobs:
       python: "3.6"
       script:
         - hass -c . --daemon
-        - sleep 10
+        - sleep 30
         - cat ./home-assistant.log
         - if grep -q 'ERROR' ./home-assistant.log; then echo "There was an error starting Home Assistant"; exit 1; fi

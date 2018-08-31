@@ -80,16 +80,14 @@ class AftershipSensor(Entity):
         """Update the sensor"""
         base_link = 'https://track.aftership.com/'
         result = self._aftership.get_trackings(self._api_key)
-        if not result['success']:
+        if 'count' not in str(data):
+            self._state = 0
             return False
         else:
             _LOGGER.warning(result)
             self.hass.data[DATA] = {}
             data = result['data']
-            if 'count' not in str(data):
-                self._state = 0
-            else:
-                self._state = data['count']
+            self._state = data['count']
             for parcel in data['trackings']:
                 parcel_data = {}
                 if not parcel['title']:
