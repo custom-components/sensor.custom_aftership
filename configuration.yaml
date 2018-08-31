@@ -1,4 +1,5 @@
-homeassistant: # https://www.home-assistant.io/docs/configuration/basic/
+## this is used by travis
+homeassistant:
   name: Home Assistant
   latitude: 0
   longitude: 0
