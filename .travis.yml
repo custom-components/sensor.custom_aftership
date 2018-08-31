@@ -13,6 +13,5 @@ jobs:
       script:
         - hass -c . --daemon
         - sleep 10
-        - HALOG=$(cat ./home-assistant.log)
-        - echo "$HALOG"
-        - if grep -q 'ERROR' "$HALOG"; then echo "There was an error starting Home Assistant"; exit 1; fi
+        - cat ./home-assistant.log
+        - if grep -q 'ERROR' ./home-assistant.log; then echo "There was an error starting Home Assistant"; exit 1; fi
