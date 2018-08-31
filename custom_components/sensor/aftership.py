@@ -38,6 +38,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 _LOGGER = logging.getLogger(__name__)
 
+
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Set up the sensor platform"""
     api_key = config.get(CONF_API_KEY)
@@ -62,6 +63,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     hass.services.register(DOMAIN, SERVICE_NEW_TRACKING, handle_new_tracking,
                            schema=NEW_TRACKING_SERVICE_SCHEMA)
 
+
 class AftershipSensor(Entity):
     """The sensor class"""
     def __init__(self, hass, api_key, name):
@@ -73,7 +75,6 @@ class AftershipSensor(Entity):
         self._state = 0
         self.hass.data[DATA] = {}
         self.update()
-
 
     def update(self):
         """Update the sensor"""
@@ -99,7 +100,8 @@ class AftershipSensor(Entity):
                 parcel_data['slug'] = parcel['slug']
                 parcel_data['last_update'] = parcel['updated_at']
                 parcel_data['tracking_number'] = parcel['tracking_number']
-                parcel_data['link'] = base_link + parcel['slug'] + '/' + parcel['tracking_number']
+                link = parcel['slug'] + '/' + parcel['tracking_number']
+                parcel_data['link'] = base_link + link
                 self.hass.data[DATA][parcel['tracking_number']] = parcel_data
 
     @property

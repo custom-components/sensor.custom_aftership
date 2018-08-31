@@ -5,4 +5,4 @@ python:
 install: pip install pycodestyle homeassistant
 script:
   - find . -name \*.py -exec pycodestyle {} +
-  - hass -c .travis/ --script check_config
+  - hass -c . --script check_config
