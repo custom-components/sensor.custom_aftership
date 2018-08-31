@@ -8,4 +8,4 @@ script:
   - ls
   - hass -c . --daemon
   - sleep 10
-  - find . -name \*home-assistant.log -exec cat {} +
+  - find . -name \*home-assistant.log
