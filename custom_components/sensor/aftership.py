@@ -86,7 +86,10 @@ class AftershipSensor(Entity):
             _LOGGER.warning(result)
             self.hass.data[DATA] = {}
             data = result['data']
-            self._state = data['count']
+            if 'count' not in str(data):
+                self._state = 0
+            else:
+                self._state = data['count']
             for parcel in data['trackings']:
                 parcel_data = {}
                 if not parcel['title']:
