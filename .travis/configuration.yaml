@@ -1,0 +1,11 @@
+homeassistant: # https://www.home-assistant.io/docs/configuration/basic/
+  name: Home Assistant
+  latitude: 0
+  longitude: 0
+  elevation: 0
+  unit_system: metric
+  time_zone: Europe/London
+
+sensor:
+  platform: aftership
+  api_key: '9781915b342514bf0dede6e3d058a'
