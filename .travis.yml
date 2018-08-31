@@ -5,9 +5,9 @@ python:
 install: pip install pycodestyle homeassistant
 script:
   - find . -name \*.py -exec pycodestyle {} +
-  - hass -c . --script check_config
   - ls
   - hass -c . --daemon
   - wait 10
-  - cat ./home-assistant-log
+  - cat ./home-assistant.log
   - ls
+  - find . -name \home-assistant.log -exec cat {} +
