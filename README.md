@@ -1,4 +1,4 @@
-# sensor.aftership
+# sensor.aftership [![Build Status](https://travis-ci.com/custom-components/sensor.aftership.svg?branch=master)](https://travis-ci.com/custom-components/sensor.aftership)
 
 A platform which allows you to get information about pending parcels.
   
