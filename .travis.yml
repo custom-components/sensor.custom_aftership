@@ -15,4 +15,4 @@ jobs:
         - sleep 10
         - HALOG=$(cat ./home-assistant.log)
         - echo "$HALOG"
-        - if grep -q 'ERROR' "$HALOG"; then; echo "There was an error starting Home Assistant"; exit 1; fi
+        - if grep -q 'ERROR' "$HALOG"; then echo "There was an error starting Home Assistant"; exit 1; fi
