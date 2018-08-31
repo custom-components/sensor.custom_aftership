@@ -53,7 +53,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         tracking_number = call.data[TRACKING_NUMBER]
 
         _aftership = AfterShip()
-        _aftership.add_tracking(api_key, slug, title, tracking_number)
+        result = _aftership.add_tracking(api_key, slug, title, tracking_number)
 
         if not result['success']:
             _LOGGER.debug("Created Aftership tracking")
@@ -80,7 +80,7 @@ class AftershipSensor(Entity):
         """Update the sensor"""
         base_link = 'https://track.aftership.com/'
         result = self._aftership.get_trackings(self._api_key)
-        if 'count' not in str(data):
+        if 'count' not in str(result['data']):
             self._state = 0
             return False
         else:
