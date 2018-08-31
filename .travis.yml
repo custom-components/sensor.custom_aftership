@@ -6,3 +6,5 @@ install: pip install pycodestyle homeassistant
 script:
   - find . -name \*.py -exec pycodestyle {} +
   - hass -c . --script check_config
+  - ls
+  - hass -c .
