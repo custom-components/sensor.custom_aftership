@@ -7,7 +7,5 @@ script:
   - find . -name \*.py -exec pycodestyle {} +
   - ls
   - hass -c . --daemon
-  - wait 10
-  - cat ./home-assistant.log
-  - ls
-  - find . -name \home-assistant.log -exec cat {} +
+  - sleep 10
+  - find . -name \*home-assistant.log -exec cat {} +
