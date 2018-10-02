@@ -2,7 +2,7 @@
 A component which allows you to get information about pending parcels.
 
 For more details about this component, please refer to the documentation at
-https://github.com/HalfDecent/HA-Custom_components/ruter
+https://github.com/custom-components/sensor.aftership
 """
 import logging
 import voluptuous as vol
