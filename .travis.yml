@@ -1,5 +1,5 @@
 language: python
-install: pip install pycodestyle homeassistant
+install: pip install pycodestyle
 jobs:
   include:
     - stage: test
@@ -7,11 +7,3 @@ jobs:
       python: "3.6"
       script:
         - find . -name \*.py -exec pycodestyle {} +
-    - stage: test
-      name: "Load component/platform in Home Assistant"
-      python: "3.6"
-      script:
-        - hass -c . --daemon
-        - sleep 30
-        - cat ./home-assistant.log
-        - if grep -q 'ERROR' ./home-assistant.log; then echo "There was an error starting Home Assistant"; exit 1; fi
