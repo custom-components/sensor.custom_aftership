@@ -2,7 +2,7 @@
 A component which allows you to get information about pending parcels.
 
 For more details about this component, please refer to the documentation at
-https://github.com/custom-components/sensor.aftership
+https://github.com/custom-components/sensor.custom_aftership
 """
 import logging
 import voluptuous as vol
@@ -10,7 +10,7 @@ from homeassistant.helpers.entity import Entity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import (DOMAIN, PLATFORM_SCHEMA)
 
-__version__ = '0.3.0'
+__version__ = '0.4.0'
 
 REQUIREMENTS = ['pyaftership==0.0.2']
 

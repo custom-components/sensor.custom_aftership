@@ -8,5 +8,5 @@ homeassistant:
   time_zone: Europe/London
 
 sensor:
-  platform: aftership
+  platform: custom_aftership
   api_key: '9781915b342514bf0dede6e3d058a'
