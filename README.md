@@ -1,9 +1,9 @@
-# sensor.custom_aftership [![Build Status](https://travis-ci.com/custom-components/sensor.aftership.svg?branch=master)](https://travis-ci.com/custom-components/sensor.aftership)
+# sensor.custom_aftership
 
 A platform which allows you to get information about pending parcels.
   
-To get started put `/custom_components/sensor/custom_aftership.py` here:  
-`<config directory>/custom_components/sensor/custom_aftership.py`  
+To get started put `/custom_components/custom_aftership/sensor.py` here:  
+`<config directory>/custom_components/custom_aftership/sensor.py`  
   
 **Example configuration.yaml:**
 
